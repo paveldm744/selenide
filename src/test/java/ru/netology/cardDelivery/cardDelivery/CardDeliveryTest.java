@@ -24,28 +24,6 @@ public class CardDeliveryTest {
     String generateDate(int days) {
         return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
-
-    WebDriver driver;
-
-    @BeforeAll
-    static void setupClass() {
-        WebDriverManager.chromedriver().setup();
-    }
-
-    @BeforeEach
-    void setup() {
-        ChromeOptions options = new ChromeOptions();
-        Configuration.headless = true;
-        //options.setHeadless(true);
-        driver = new ChromeDriver(options);
-    }
-
-    @AfterEach
-    void teardown() {
-        driver.quit();
-        driver = null;
-    }
-
     @Test
     void shouldTestWithValidValue() {
         open("http://localhost:9999/");
