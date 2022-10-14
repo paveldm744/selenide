@@ -1,5 +1,6 @@
 package ru.netology.cardDelivery.cardDelivery;
 
+import com.codeborne.selenide.Configuration;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -23,6 +24,7 @@ public class CardDeliveryTest {
     String generateDate(int days) {
         return LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
+
     WebDriver driver;
 
     @BeforeAll
@@ -33,7 +35,8 @@ public class CardDeliveryTest {
     @BeforeEach
     void setup() {
         ChromeOptions options = new ChromeOptions();
-        options.setHeadless(true);
+        Configuration.headless = true;
+        //options.setHeadless(true);
         driver = new ChromeDriver(options);
     }
 
@@ -58,7 +61,8 @@ public class CardDeliveryTest {
     }
 
     @Test
-    void shouldTestValidValueWithHyphen() {open("http://localhost:9999/");
+    void shouldTestValidValueWithHyphen() {
+        open("http://localhost:9999/");
         String date = generateDate(3);
         $("[data-test-id='city'] input").setValue("Москва");
         $("[data-test-id='date'] input").sendKeys(Keys.chord(Keys.SHIFT, Keys.HOME), Keys.DELETE);
